@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_08_151029) do
+ActiveRecord::Schema.define(version: 2020_02_08_153301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accessory_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.integer "price_cents", null: false
+    t.integer "stock", default: 0, null: false
+    t.bigint "item_category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_category_id"], name: "index_accessory_items_on_item_category_id"
+  end
 
   create_table "item_categories", force: :cascade do |t|
     t.string "name", null: false
@@ -32,4 +43,5 @@ ActiveRecord::Schema.define(version: 2020_02_08_151029) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "accessory_items", "item_categories"
 end
