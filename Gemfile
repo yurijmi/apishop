@@ -18,6 +18,10 @@ gem 'ransack', '~> 2.3'
 gem 'rack-cors', '~> 1.1'
 gem 'active_model_serializers', '~> 0.10'
 
+# Pagination
+gem 'will_paginate', '~> 3.2'
+gem 'api-pagination', '~> 4.8'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

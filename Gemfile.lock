@@ -63,6 +63,7 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    api-pagination (4.8.2)
     bcrypt (3.1.13)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
@@ -182,6 +183,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    will_paginate (3.2.1)
     zeitwerk (2.2.2)
 
 PLATFORMS
@@ -189,6 +191,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10)
+  api-pagination (~> 4.8)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
@@ -206,6 +209,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  will_paginate (~> 3.2)
 
 RUBY VERSION
    ruby 2.7.0p0
