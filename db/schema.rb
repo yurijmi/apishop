@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_151029) do
 
   create_table "item_categories", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
+    t.text "description", null: false
     t.integer "item_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
