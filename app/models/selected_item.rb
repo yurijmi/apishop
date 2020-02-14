@@ -12,6 +12,10 @@ class SelectedItem < ApplicationRecord
   
   before_validation :set_price_from_item
   
+  def total_price_cents
+    self.quantity * self.price_cents
+  end
+  
 private
   
   def cart_id_xor_order_id
