@@ -13,6 +13,11 @@ class User < ApplicationRecord
     find_by email: request[:email].downcase
   end
   
+  # Creating a cart if User has none
+  def cart
+    super || Cart.create(user_id: self.id)
+  end
+  
 private
   
   def downcase_fields
