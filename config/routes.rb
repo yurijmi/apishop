@@ -9,5 +9,12 @@ Rails.application.routes.draw do
     resources :items, controller: :accessory_items, only: :index
   end
   
-  resources :items, controller: :accessory_items
+  resources :items, controller: :accessory_items do
+    member do
+      post   'buy' => 'cart_items#create'
+      put    'buy' => 'cart_items#update'
+      patch  'buy' => 'cart_items#update'
+      delete 'buy' => 'cart_items#destroy'
+    end
+  end
 end
