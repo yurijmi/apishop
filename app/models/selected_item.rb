@@ -9,11 +9,18 @@ class SelectedItem < ApplicationRecord
   
   validate :cart_id_xor_order_id
   
+  before_validation :set_price_from_item
+  
 private
   
   def cart_id_xor_order_id
     unless cart_id.blank? ^ order_id.blank?
       errors.add(:base, 'Specify cart or order, not both')
     end
+  end
+  
+  # Synchronizes price_cents with AccessoryItem's price_cents
+  def set_price_from_item
+    self.price_cents = self.item.price_cents if self.price_cents.blank?
   end
 end
