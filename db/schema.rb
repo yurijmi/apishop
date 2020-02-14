@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_14_111354) do
+ActiveRecord::Schema.define(version: 2020_02_14_112308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 2020_02_14_111354) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "selected_items", force: :cascade do |t|
+    t.bigint "accessory_item_id", null: false
+    t.bigint "cart_id"
+    t.bigint "order_id"
+    t.integer "price_cents", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["accessory_item_id"], name: "index_selected_items_on_accessory_item_id"
+    t.index ["cart_id"], name: "index_selected_items_on_cart_id"
+    t.index ["order_id"], name: "index_selected_items_on_order_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -64,4 +77,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_111354) do
   add_foreign_key "accessory_items", "item_categories"
   add_foreign_key "carts", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "selected_items", "accessory_items"
+  add_foreign_key "selected_items", "carts"
+  add_foreign_key "selected_items", "orders"
 end
