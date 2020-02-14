@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_112308) do
 
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.integer "items_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_112308) do
   create_table "item_categories", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
-    t.integer "item_count", default: 0, null: false
+    t.integer "items_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_item_categories_on_name", unique: true
