@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
   
+  has_one :cart, dependent: :destroy
+  
   validates :email, presence: true, uniqueness: true
   
   before_save :downcase_fields
