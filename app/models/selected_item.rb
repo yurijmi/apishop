@@ -8,6 +8,7 @@ class SelectedItem < ApplicationRecord
   validates :quantity,    presence: true, numericality: { greater_than: 0 }
   
   validate :cart_id_xor_order_id
+  validate :quantity_based_on_stock
   
   before_validation :set_price_from_item
   
@@ -16,6 +17,13 @@ private
   def cart_id_xor_order_id
     unless cart_id.blank? ^ order_id.blank?
       errors.add(:base, 'Specify cart or order, not both')
+    end
+  end
+  
+  # Validates that quantity does not exceed what's available in stock
+  def quantity_based_on_stock
+    if self.quantity > self.item.stock
+      errors.add(:quantity, "should not exceed what's available in stock")
     end
   end
   
