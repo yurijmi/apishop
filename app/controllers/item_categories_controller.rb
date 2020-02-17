@@ -15,6 +15,8 @@ class ItemCategoriesController < ApplicationController
   def create
     @item_category = ItemCategory.new(item_category_params)
     
+    authorize @item_category
+    
     if @item_category.save
       render json: @item_category, status: :created, location: @item_category
     else
@@ -23,6 +25,8 @@ class ItemCategoriesController < ApplicationController
   end
   
   def update
+    authorize @item_category
+    
     if @item_category.update(item_category_params)
       render json: @item_category
     else
@@ -31,6 +35,8 @@ class ItemCategoriesController < ApplicationController
   end
   
   def destroy
+    authorize @item_category
+    
     @item_category.destroy
   end
   

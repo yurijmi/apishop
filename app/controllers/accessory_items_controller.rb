@@ -16,6 +16,8 @@ class AccessoryItemsController < ApplicationController
   def create
     @accessory_item = AccessoryItem.new(accessory_item_params)
     
+    authorize @accessory_item
+    
     if @accessory_item.save
       render json: @accessory_item, status: :created, location: item_url(@accessory_item)
     else
@@ -24,6 +26,8 @@ class AccessoryItemsController < ApplicationController
   end
   
   def update
+    authorize @accessory_item
+    
     if @accessory_item.update(accessory_item_params)
       render json: @accessory_item
     else
@@ -32,6 +36,8 @@ class AccessoryItemsController < ApplicationController
   end
   
   def destroy
+    authorize @accessory_item
+    
     @accessory_item.destroy
   end
   
