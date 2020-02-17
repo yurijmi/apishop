@@ -2,11 +2,11 @@ class OrdersController < ApplicationController
   before_action :authenticate_user
   
   def index
-    paginate json: current_user.orders
+    paginate json: current_user.orders.includes(:selected_items, items: :category)
   end
   
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.includes(:selected_items, items: :category).find(params[:id])
     
     render json: @order
   end
