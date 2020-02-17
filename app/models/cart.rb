@@ -24,4 +24,9 @@ class Cart < ApplicationRecord
     
     selected_item
   end
+  
+  # Returns total price for all items in cart
+  def total_price_cents
+    self.selected_items.map(&:total_price_cents).reduce(0, :+)
+  end
 end
