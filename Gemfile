@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'knock', '~> 2.1'
 gem 'pundit', '~> 2.1'
 gem 'ransack', '~> 2.3'
+gem 'faker', '~> 2.10'
 
 gem 'rack-cors', '~> 1.1'
 gem 'active_model_serializers', '~> 0.10'
