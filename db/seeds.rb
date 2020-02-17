@@ -33,6 +33,8 @@ items = AccessoryItem.pluck(:id)
 user = User.first
 
 100.times do
+  user.reload
+  
   rand(1..25).times do
     item = AccessoryItem.find(items.sample)
     
@@ -43,4 +45,7 @@ user = User.first
   
   order = Order.from_cart(user.cart, address: Faker::Address.full_address)
   order.save
+  
+  user.cart.reload
+  user.cart.destroy!
 end
