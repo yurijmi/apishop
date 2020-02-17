@@ -6,7 +6,7 @@ class AccessoryItemsController < ApplicationController
     @category = ItemCategory.find(params[:category_id]) if params[:category_id]
     @accessory_items = @category ? @category.items : AccessoryItem.all
     
-    paginate json: @accessory_items
+    paginate json: @accessory_items.includes(:category)
   end
   
   def show
