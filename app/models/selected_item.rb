@@ -7,7 +7,7 @@ class SelectedItem < ApplicationRecord
   validates :price_cents, presence: true, numericality: { greater_than: 0 }
   validates :quantity,    presence: true, numericality: { greater_than: 0 }
   
-  validate :cart_id_xor_order_id
+  validate :cart_xor_order
   validate :quantity_based_on_stock
   
   before_validation :set_price_from_item
@@ -18,8 +18,8 @@ class SelectedItem < ApplicationRecord
   
 private
   
-  def cart_id_xor_order_id
-    unless cart_id.blank? ^ order_id.blank?
+  def cart_xor_order
+    unless cart.blank? ^ order.blank?
       errors.add(:base, 'Specify cart or order, not both')
     end
   end
