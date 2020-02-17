@@ -16,6 +16,13 @@ class CartItemsController < ApplicationController
   def update
     @cart_item.quantity = params[:quantity].to_i
     
+    # Removing item from cart if it's quantity less than 1
+    if @cart_item.quantity < 1
+      @cart_item.destroy
+      
+      render json: current_user.cart, status: :accepted, location: cart_url
+    end
+    
     if @cart_item.save
       render json: current_user.cart, status: :accepted, location: cart_url
     else
@@ -25,6 +32,8 @@ class CartItemsController < ApplicationController
   
   def destroy
     @cart_item.destroy
+    
+    render json: current_user.cart, status: :accepted, location: cart_url
   end
   
 private
