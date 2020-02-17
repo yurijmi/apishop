@@ -15,6 +15,8 @@ class OrdersController < ApplicationController
     @order = Order.from_cart(current_user.cart, order_params)
     
     if @order.save
+      # Need to reload the Cart or else rails will destroy SelectedItems even though they're no longer associated
+      current_user.cart.reload
       current_user.cart.destroy!
       
       OrdersMailer.with(id: @order.id).new_order_email.deliver_later
