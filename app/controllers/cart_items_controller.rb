@@ -3,8 +3,10 @@ class CartItemsController < ApplicationController
   before_action :set_cart_item, only: [:update, :destroy]
   
   def create
-    @item = AccessoryItem.find(params[:id])
-    @cart_item = current_user.cart.add_item(@item, params[:quantity].to_i || 1)
+    item = AccessoryItem.find(params[:id])
+    quantity = params[:quantity] ? params[:quantity].to_i : 1
+    
+    @cart_item = current_user.cart.add_item(item, quantity)
     
     if @cart_item.changed?
       render json: @cart_item.errors, status: :unprocessable_entity, location: cart_url
