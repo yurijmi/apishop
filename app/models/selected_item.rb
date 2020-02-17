@@ -7,7 +7,7 @@ class SelectedItem < ApplicationRecord
   validates :price_cents, presence: true, numericality: { greater_than: 0 }
   validates :quantity,    presence: true, numericality: { greater_than: 0 }
   
-  validate :cart_xor_order
+  # validate :cart_xor_order
   validate :quantity_based_on_stock
   
   before_validation :set_price_from_item
