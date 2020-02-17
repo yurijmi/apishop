@@ -9,6 +9,19 @@ class Order < ApplicationRecord
   validates :address, presence: true
   validates :selected_items, length: { minimum: 1, too_short: 'cart is empty' }
   
+  # Displaying error messages from selected_items
+  validate do |order|
+    self.errors.delete(:selected_items)
+    
+    order.selected_items.each do |selected_item|
+      next if selected_item.valid?
+      
+      selected_item.errors.full_messages.each do |msg|
+        self.errors.add(:selected_items, "Item ##{selected_item.accessory_item_id}: #{msg}")
+      end
+    end
+  end
+  
   after_create :update_stock
   
   # Creates an Order from existing Cart
