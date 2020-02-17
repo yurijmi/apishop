@@ -11,8 +11,6 @@ class Order < ApplicationRecord
   
   # Displaying error messages from selected_items
   validate do |order|
-    self.errors.delete(:selected_items)
-    
     order.selected_items.each do |selected_item|
       next if selected_item.valid?
       
