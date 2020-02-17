@@ -7,6 +7,7 @@ class Order < ApplicationRecord
   enum status: [:pending, :shipping, :completed]
   
   validates :address, presence: true
+  validates :selected_items, length: { minimum: 1, too_short: 'cart is empty' }
   
   # Creates an Order from existing Cart
   # 
