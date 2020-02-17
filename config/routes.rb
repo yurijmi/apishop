@@ -17,4 +17,6 @@ Rails.application.routes.draw do
       delete 'buy' => 'cart_items#destroy'
     end
   end
+  
+  resources :orders, only: [:index, :show, :create]
 end
