@@ -36,7 +36,7 @@ class Order < ApplicationRecord
     
     cart.selected_items.each do |item|
       order.selected_items << item
-      order.total_cents += item.price_cents
+      order.total_cents += item.price_cents * item.quantity
       
       item.cart_id = nil
     end
