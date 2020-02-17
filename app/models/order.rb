@@ -9,6 +9,8 @@ class Order < ApplicationRecord
   validates :address, presence: true
   validates :selected_items, length: { minimum: 1, too_short: 'cart is empty' }
   
+  after_create :update_stock
+  
   # Creates an Order from existing Cart
   # 
   # @param [Cart] cart Cart to create order from
@@ -27,5 +29,19 @@ class Order < ApplicationRecord
     end
     
     order
+  end
+  
+private
+  
+  def update_stock
+    self.selected_items.each do |selected_item|
+      selected_item.item.stock = selected_item.item.stock - selected_item.quantity
+      
+      unless selected_item.item.save
+        self.errors.add(:selected_items, "item ##{selected_item.item.id} is out of stock")
+        
+        return false
+      end
+    end
   end
 end
