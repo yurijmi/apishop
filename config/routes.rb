@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   resource :cart, only: [:show, :destroy]
   
-  resources :categories, controller: :item_categories, only: [:index, :show] do
+  resources :categories, controller: :item_categories do
     resources :items, controller: :accessory_items, only: :index
   end
   
