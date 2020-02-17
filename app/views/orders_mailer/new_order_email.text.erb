@@ -1,0 +1,19 @@
+Hello Person!
+
+We are informing you that your order in API Shop is created.
+
+In case you forgot, here's what you ordered:
+
+<% @order.selected_items.each do |item| %>
+  <%= item.item.name %> for <%= '$%.2f' % (item.total_price_cents / 100.0) %> (<%= item.quantity %> x <%= '$%.2f' % (item.price_cents / 100.0) %>)
+<% end %>
+
+Totalling to: <%= '$%.2f' % (@order.total_cents / 100.0) %>
+
+We will ship your order to:
+  <%= @order.address %>
+
+You have received this email because you have an account on our website.
+
+Best Regards,
+Test Mailer

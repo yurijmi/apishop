@@ -15,6 +15,8 @@ class OrdersController < ApplicationController
     @order = Order.from_cart(current_user.cart, order_params)
     
     if @order.save
+      OrdersMailer.with(id: @order.id).new_order_email.deliver_later
+      
       render json: @order, status: :created, location: @order
     else
       render json: @order.errors, status: :unprocessable_entity, location: orders_url
